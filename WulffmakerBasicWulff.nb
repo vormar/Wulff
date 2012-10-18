@@ -10,32 +10,38 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    175675,       4026]
-NotebookOptionsPosition[    174135,       3976]
-NotebookOutlinePosition[    174492,       3992]
-CellTagsIndexPosition[    174449,       3989]
+NotebookDataLength[    205181,       4654]
+NotebookOptionsPosition[    203635,       4604]
+NotebookOutlinePosition[    203993,       4620]
+CellTagsIndexPosition[    203950,       4617]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Wulffmaker v.1.0 (beta)", "Title",
+Cell["\<\
+Wulffmaker: Wulff shape edition (beta)\
+\>", "Title",
  CellChangeTimes->{{3.5184451290815563`*^9, 3.518445138694195*^9}, {
    3.547215622356022*^9, 3.547215624681027*^9}, {3.547216057813406*^9, 
-   3.5472160597412987`*^9}, 3.547217091440813*^9}],
+   3.5472160597412987`*^9}, 3.547217091440813*^9, {3.548494302839478*^9, 
+   3.548494303150022*^9}, {3.548494353109837*^9, 3.5484943579095716`*^9}}],
 
 Cell["\<\
 Brought to you by Rachel V. Zucker & W. Craig Carter
-Please direct questions, comments, and bug reports to rzucker@mit.edu\
+Please direct questions, comments, and bug reports to rzucker@mit.edu
+
+(Double-click the blue brackets at the far right of the window to expand/hide \
+sections)\
 \>", "Subsubtitle",
  CellChangeTimes->{{3.518445150958107*^9, 3.518445204025096*^9}, {
   3.518445591350183*^9, 3.518445595113935*^9}, {3.518520646159315*^9, 
-  3.5185206550535793`*^9}}],
+  3.5185206550535793`*^9}, {3.54849431651381*^9, 3.548494317033304*^9}}],
 
 Cell[CellGroupData[{
 
-Cell["Introduction", "Subsection",
+Cell["Introduction", "Section",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  CellChangeTimes->{{3.518447108352004*^9, 3.518447131263427*^9}, {
   3.519059793403633*^9, 3.519059797232799*^9}, {3.546691469192992*^9, 
@@ -47,23 +53,30 @@ Cell["Current Capabilities", "Subsubsection",
    3.518448893367828*^9, 3.518448893773073*^9}, 3.5184501348073997`*^9}],
 
 Cell[TextData[{
- "Wulffmaker v.1.0 is designed to display the shape of crystals in three \
+ "Wulffmaker is designed to display the shape of crystals in three \
 dimensions. It is an improved version of the older progam ",
  StyleBox["Wulffman",
   FontSlant->"Italic"],
  ", and is platform-independant. The user can select any crystallographic \
 symmetry and specify crystallographic axes (a, b, c) and angles (\[Alpha], \
-\[Beta], \[Gamma]), up to 12 symmetrically distinct facets (\
+\[Beta], \[Gamma]), up to 30 symmetrically distinct facets (\
 \[OpenCurlyDoubleQuote]facet families\[CloseCurlyDoubleQuote]), and assigns \
 each family a surface energy (\[Gamma]). The facet families are identified by \
 their normal vector in Miller indices, {h k l}. The user also controls some \
 aspects of the Wulff shape plot, including colors, opacity, and whether to \
-display the crystallographic axes. \[OpenCurlyDoubleQuote]Zone axis\
+display the crystallographic axes. \[OpenCurlyDoubleQuote]Viewing axis\
 \[CloseCurlyDoubleQuote] is the viewing direction (orthagonal to your \
 screen), and \[OpenCurlyDoubleQuote]vertical \
 direction\[CloseCurlyDoubleQuote] is the crystallographic direction pointing \
 to the top of your screen. By clicking an dragging on the plot its self, it \
-can be rotated."
+can be rotated. For a complete discussion of this software, and the relation \
+to materials science, see the associated publication: RV Zucker, D Chatain, U \
+Dahmen, S Hagege, WC Carter. \[OpenCurlyDoubleQuote]New Software Tools for \
+the Calculation and Display of Isolated and Attached Interfacial-Energy \
+Minimizing Particle Shapes.\[CloseCurlyDoubleQuote] ",
+ StyleBox["Journal of Materials Science",
+  FontSlant->"Italic"],
+ ", 2012."
 }], "Text",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  CellChangeTimes->{{3.518445876710065*^9, 3.518446348026244*^9}, {
@@ -77,7 +90,7 @@ can be rotated."
    3.518448419649967*^9, 3.5184501348076067`*^9, {3.51851953441136*^9, 
    3.51851953481138*^9}, {3.519060115114377*^9, 3.519060140527372*^9}, {
    3.5466913362789783`*^9, 3.54669138420216*^9}, {3.547216144403792*^9, 
-   3.547216147929626*^9}}],
+   3.547216147929626*^9}, {3.548494335760203*^9, 3.548494383222123*^9}}],
 
 Cell["Using Wulffmaker", "Subsubsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
@@ -86,13 +99,34 @@ Cell["Using Wulffmaker", "Subsubsection",
    3.547216160812276*^9, 3.547216164596195*^9}}],
 
 Cell[TextData[{
- "The controls for lattice symmetry, point group, number of facet families \
-used, and plotting options appear above the Wulff shape. The default lattice \
-symmetry is Cubic, the default point group is \[OpenCurlyDoubleQuote]m",
+ "When you open the code, you will probably be asked whether the enable \
+dynamic updating. Click \[OpenCurlyDoubleQuote]yes.\[CloseCurlyDoubleQuote] \
+If the code does not automatically evaluate, go to the navigation bar for the \
+CD player or ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " (whichever you are using) and select Evaluation -> Evaluate Notebook. You \
+can also ensure that dynamic updating is enabled by going to Evaluation -> \
+Dynamic Updating Enabled. There will be a check-mark next to the item if \
+dynamic updating is turned on. \n\nDuring the evaluation, you will see some \
+blue brackets at the right of the screen become bold and black. Do not try to \
+change any variables or begin new calculations while the code is evaluating - \
+this may cause ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to either abort the calculation or freeze. If it does stop working, you \
+can abort all evaluations by selecting Evaluation -> Abort Evaluation. To get \
+a fresh start, select Evaluation -> Quit Kernel -> Quit. This will reset ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "\[CloseCurlyQuote]s memory. To use the code again, select Evaluation -> \
+Evaluate Notebook. \n\nThe controls for lattice symmetry, point group, number \
+of facet families used, and plotting options appear above the Wulff shape. \
+The default lattice symmetry is Cubic, the default point group is \
+\[OpenCurlyDoubleQuote]m",
  Cell[BoxData[
   FormBox[
-   OverscriptBox["3", "_"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   OverscriptBox["3", "_"], TraditionalForm]]],
  "m\[CloseCurlyDoubleQuote], and the default number of facet families is 3. \
 Only the point groups consistent with the selected lattice symmetry are \
 available in the point group menu. The point groups are identified by their \
@@ -117,12 +151,12 @@ controls that are \[OpenCurlyDoubleQuote]free variables\
 The axes default to having length 1 and the angles default to 90 degrees, but \
 can be freely changed. For ay symmetry other than cubic, selecting these \
 variables is essential to representing the Wulff shape correctly.\n\nYou may \
-modify the source code, but we strongly suggest that modified vesions be \
-saved with a different name so that you can always revert to the original. \
-Example modifications include changing the default {h k l} values, changing \
-the types of controls available on Wulffmaker, or changing default colors. \n\
-\nIf the shape specified by the facet families and point symmetry is not a \
-closed volume, Wulffmaker will return \[OpenCurlyDoubleQuote]$Aborted\
+modify the source code, but we suggest that modified vesions be saved with a \
+different name so that you can always revert to the original. Example \
+modifications include changing the default {h k l} values, changing the types \
+of controls available on Wulffmaker, or changing default colors. \n\nIf the \
+shape specified by the facet families and point symmetry is not a closed \
+volume, Wulffmaker will return \[OpenCurlyDoubleQuote]$Aborted\
 \[CloseCurlyDoubleQuote] or an error (indicated by the plot area turning pink \
 and red text below the user interface). By adding more facet families, one \
 can find a closed shape. "
@@ -133,12 +167,12 @@ can find a closed shape. "
    3.5185207221890907`*^9, 3.518520741580729*^9}, {3.518520884444277*^9, 
    3.5185209072772007`*^9}, {3.547216171973255*^9, 3.547216280158394*^9}, {
    3.547216394461073*^9, 3.547216621275281*^9}, {3.547216710074752*^9, 
-   3.5472167220201187`*^9}}],
+   3.5472167220201187`*^9}, {3.548494437941951*^9, 3.5484945166483717`*^9}}],
 
-Cell["Known Issues", "Subsubsection",
+Cell["Possible Issues", "Subsubsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  CellChangeTimes->{{3.51844717796574*^9, 3.518447188328124*^9}, 
-   3.518450134808395*^9}],
+   3.518450134808395*^9, {3.548494621513682*^9, 3.548494623918316*^9}}],
 
 Cell["\<\
 If the lattice symmetry is changed, the point group does not automatically \
@@ -149,9 +183,29 @@ turning pink). To display the correct shape, the user must select a point \
 group from the menu. Wulffmaker should recover once a compatible point group \
 is chosen.
 
+Occasionally, a shape calculated by Wulffmaker will have holes in the \
+surface, and will not look right. This is because the value of the variable \
+\[OpenCurlyDoubleQuote]sensitivity\[CloseCurlyDoubleQuote] is too small. \
+\[OpenCurlyDoubleQuote]Sensitivity\[CloseCurlyDoubleQuote] determines the \
+trade-off between speed and how carefully Wulffmaker looks for vertices on \
+the equilibrum shape. Under most circumstances, a sensitivity in the range \
+10-18 is sufficient. Try increasing by ~5 or 10 at a a time until the holes \
+disappear. Opperating with an unnecissarily high sensitivity does not make \
+the calculation more accurate, it only makes it much slower. Just use the \
+smallest sensitivity that returns a shape without holes.
+
 If too many facet families are included (>~20, depending on how powerful your \
 computer is), the calculation may abort, even without an apparent error. \
-Future versions should correct this issue.\
+Future versions should correct this issue.
+
+If the calculation is taking too long, you can abort the calculation on a Mac \
+by selecting Evaluation -> Abort Evaluation. To re-start, re-evaluate the \
+code by selecting Evaluation -> Evaluate Notebook.
+
+If one or both of the Wulff shapes are non-cubic in symmetry, a common \
+mistake is not inputting the relative lengths of the crystallographic axes, \
+(a, b, c). These values determine the conversion from Miller indices to \
+cartesian coordinates.\
 \>", "Text",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  CellChangeTimes->{{3.518446836233048*^9, 3.518446904138329*^9}, {
@@ -160,7 +214,9 @@ Future versions should correct this issue.\
    3.518447491015839*^9}, 3.518448421687047*^9, {3.5184486955227823`*^9, 
    3.51844887534451*^9}, {3.518450069120241*^9, 3.518450096356513*^9}, {
    3.546691398747869*^9, 3.5466914516713943`*^9}, {3.547216105813833*^9, 
-   3.547216122254467*^9}, {3.547216745884967*^9, 3.54721674985877*^9}}]
+   3.547216122254467*^9}, {3.547216745884967*^9, 3.54721674985877*^9}, {
+   3.5484945494685698`*^9, 3.5484945863008204`*^9}, {3.549363785313493*^9, 
+   3.549363786352255*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -218,10 +274,12 @@ Cell[BoxData[
       RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
       RowBox[{"Which", "[", 
        RowBox[{
-        RowBox[{"j", "\[Equal]", "1"}], ",", 
+        RowBox[{"j", "\[Equal]", "1"}], ",", " ", "0", " ", 
         RowBox[{"(*", " ", 
-         RowBox[{
-          SubscriptBox["h", "1"], " ", "="}], " ", "*)"}], " ", "0", ",", 
+         RowBox[{"<", 
+          RowBox[{
+           RowBox[{"-", " ", "default"}], " ", "value", " ", "for", " ", 
+           SubscriptBox["h", "1"]}]}], " ", "*)"}], ",", 
         RowBox[{"j", "\[Equal]", "2"}], ",", 
         RowBox[{"(*", " ", 
          RowBox[{
@@ -326,38 +384,252 @@ Cell[BoxData[
     RowBox[{"defaultVert", " ", "=", " ", 
      RowBox[{"{", 
       RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "}"}]}], ";"}], 
-   "\[IndentingNewLine]"}]}]], "Input",
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"defaultSens", " ", "=", " ", "18"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "Uncomment", " ", "this", " ", "section", " ", "to", " ", "set", " ", 
+       "the", " ", "default", " ", "to", " ", "the", " ", "values", " ", 
+       "for", " ", "Alumina"}], ",", " ", 
+      RowBox[{
+      "as", " ", "published", " ", "by", " ", "Kitayama", " ", "and", " ", 
+       "Glaeser"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Clear", "[", 
+        RowBox[{"pickIndex", ",", " ", "pickColor", ",", " ", "pickGamma"}], 
+        "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"pickIndex", "[", 
+        RowBox[{"i_", ",", "j_"}], "]"}]}], ":=", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", "0", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{"<", 
+             RowBox[{
+              RowBox[{"-", " ", "default"}], " ", "value", " ", "for", " ", 
+              SubscriptBox["h", "1"]}]}], " ", "*)"}], ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             SubscriptBox["k", "1"], " ", "="}], " ", "*)"}], " ", "0", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             SubscriptBox["l", "1"], " ", "="}], " ", "*)"}], "  ", "1", ",", 
+           "True", ",", "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"i", "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             SubscriptBox["h", "2"], " ", "="}], " ", "*)"}], " ", 
+           RowBox[{"-", "1"}], ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", " ", "0", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", " ", "2", ",", "True", ",", 
+           "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"i", "\[Equal]", "3"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", " ", "0", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", " ", "1", ",", "True", ",", 
+           "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"i", "\[Equal]", "4"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", " ", "0", ",", "True", ",", 
+           "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"i", "\[Equal]", "5"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", " ", "3", ",", "True", ",", 
+           "1"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"i", "\[Equal]", "6"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"j", "\[Equal]", "1"}], ",", " ", "1", ",", 
+           RowBox[{"j", "\[Equal]", "2"}], ",", " ", "0", ",", 
+           RowBox[{"j", "\[Equal]", "3"}], ",", " ", "0", ",", "True", ",", 
+           "1"}], "]"}], ",", "\[IndentingNewLine]", "True", ",", " ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "3"}], ",", "3"}], "}"}], "]"}]}], "]"}], 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "modify", " ", "the", " ", "default", " ", "display", " ", "colors", 
+         " ", "with", " ", "pickColor"}], " ", "*)"}], "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"violet", " ", "=", " ", 
+        RowBox[{"RGBColor", "[", 
+         RowBox[{
+         "0.6146486610208286`", ",", "0.26666666666666666`", ",", "1.`"}], 
+         "]"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"teal", " ", "=", " ", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{
+       "0.`", ",", "0.6463569085221638`", ",", "0.8666666666666667`"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"green", " ", "=", " ", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{
+       "0.5876401922636759`", ",", "0.8666666666666667`", ",", "0.`"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"strawberry", " ", "=", " ", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{
+       "1.`", ",", "0.26666666666666666`", ",", "0.6023041123064011`"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yellow", " ", "=", " ", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{
+       "1.`", ",", "0.9683375295643549`", ",", "0.06666666666666667`"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"pickColor", "[", "i_", "]"}], ":=", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"i", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+          "Orange", ",", "\[IndentingNewLine]", 
+          RowBox[{"i", "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+          "violet", ",", "\[IndentingNewLine]", 
+          RowBox[{"i", "\[Equal]", "3"}], ",", "\[IndentingNewLine]", "green",
+           ",", "\[IndentingNewLine]", 
+          RowBox[{"i", "\[Equal]", "4"}], ",", "\[IndentingNewLine]", 
+          "strawberry", ",", "\[IndentingNewLine]", 
+          RowBox[{"i", "\[Equal]", "5"}], ",", "\[IndentingNewLine]", "teal", 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"i", "\[Equal]", "6"}], ",", "\[IndentingNewLine]", 
+          "yellow", ",", "\[IndentingNewLine]", "True", ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Hue", "[", 
+           RowBox[{
+            RowBox[{"RandomReal", "[", "]"}], ",", "1", ",", 
+            RowBox[{"2", "/", "3"}]}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "modify", " ", "the", " ", "default", " ", "surface", " ", "energy", 
+          " ", "values", " ", "with", " ", "pickGamma"}], " ", "*)"}], 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"pickGamma", "[", "i_", "]"}]}], " ", ":=", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"i", " ", "\[Equal]", " ", "1"}], ",", 
+           "\[IndentingNewLine]", "1", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"i", " ", "\[Equal]", " ", "2"}], ",", 
+           "\[IndentingNewLine]", "0.95", ",", "\[IndentingNewLine]", 
+           RowBox[{"i", " ", "\[Equal]", " ", "3"}], ",", 
+           "\[IndentingNewLine]", "1.042", ",", "\[IndentingNewLine]", 
+           RowBox[{"i", " ", "\[Equal]", " ", "4"}], ",", 
+           "\[IndentingNewLine]", "1.08", ",", "\[IndentingNewLine]", 
+           RowBox[{"i", " ", "\[Equal]", " ", "5"}], ",", 
+           "\[IndentingNewLine]", "1.029", ",", "\[IndentingNewLine]", 
+           RowBox[{"i", " ", "\[Equal]", " ", "6"}], ",", 
+           "\[IndentingNewLine]", "1.115", ",", "\[IndentingNewLine]", "True",
+            ",", "\[IndentingNewLine]", "1"}], "]"}], "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"modify", " ", "the", " ", "deafult", " ", "symmetry"}], 
+           ",", " ", "n", ",", " ", "opacity", ",", " ", 
+           RowBox[{
+           "whether", " ", "to", " ", "show", " ", "crystallographic", " ", 
+            "axes"}], ",", " ", 
+           RowBox[{"the", " ", "zone", " ", "axis"}], ",", " ", 
+           RowBox[{"and", " ", "the", " ", "vertical", " ", "direction"}]}], 
+          " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         "defaultLattice"}], " ", "=", " ", "\"\<Hexagonal\>\""}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+     "defaultPointGroup", " ", "=", " ", 
+      "\"\<\!\(\*OverscriptBox[\(3\), \(_\)]\)m\>\""}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"defaultn", " ", "=", " ", "6"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"defaultOpacity", " ", "=", " ", "0.85"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"defaultShowAxes", " ", "=", " ", "False"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"defaultZA", " ", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "1", ",", " ", "1"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"defaultVert", " ", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"defaultSens", " ", "=", " ", "18"}], ";"}], 
+    "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]"}]}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.541759304729084*^9, 3.541759782895699*^9}, {
    3.5417602453203077`*^9, 3.5417602457220573`*^9}, {3.543744184473143*^9, 
    3.5437442104807673`*^9}, {3.5463597984760723`*^9, 3.546359806604787*^9}, {
    3.5472155934945507`*^9, 3.547215613390933*^9}, {3.547216641765665*^9, 
    3.547216664350789*^9}, 3.547216838999878*^9, {3.547217040792111*^9, 
-   3.5472170446629753`*^9}}],
+   3.5472170446629753`*^9}, {3.549638657185149*^9, 3.5496386853823013`*^9}, {
+   3.5510963526177073`*^9, 3.551096353819594*^9}, {3.5510966202033033`*^9, 
+   3.55109663812564*^9}, {3.55109965588065*^9, 3.551099701128407*^9}, {
+   3.551104412518239*^9, 3.551104446723611*^9}, {3.551104557609976*^9, 
+   3.551104558528638*^9}, {3.5511045891765223`*^9, 3.551104589990754*^9}, {
+   3.551105255967553*^9, 3.5511052569925337`*^9}, {3.551111210995578*^9, 
+   3.5511112154742107`*^9}, {3.551111285161564*^9, 3.551111345882094*^9}}],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"(*", " ", 
-   RowBox[{
-   "this", " ", "cell", " ", "contols", " ", "the", " ", "space", " ", "and", 
-    " ", "point", " ", 
-    RowBox[{"symmetries", ".", " ", "It"}], " ", "also", " ", "determines", 
-    " ", "what", " ", "is", " ", "displayed", " ", "in", " ", "The", " ", 
-    "Wulffenator", " ", 
-    RowBox[{"GUI", "."}]}], " ", "*)"}], "\[IndentingNewLine]", " ", 
-  "\[IndentingNewLine]", 
+  StyleBox[
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "this", " ", "cell", " ", "contols", " ", "the", " ", "space", " ", "and",
+      " ", "point", " ", 
+     RowBox[{"symmetries", ".", " ", "It"}], " ", "also", " ", "determines", 
+     " ", "what", " ", "is", " ", "displayed", " ", "in", " ", "The", " ", 
+     "Wulffenator", " ", 
+     RowBox[{"GUI", "."}]}], " ", "*)"}],
+   FontSize->16], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->16], 
+  StyleBox[" ",
+   FontSize->16], "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
-    "this", " ", "is", " ", "a", " ", "list", " ", "of", " ", "the", " ", 
-     "minimum", " ", "symmetry", " ", "operations", " ", "required", " ", 
-     "to", " ", "define", " ", "the", " ", "32", " ", "crystallographic", " ",
-      "point", " ", 
-     RowBox[{"groups", ".", " ", "you"}], " ", "may", " ", "add", " ", 
-     "symmetries", " ", "here", " ", "if", " ", "you", " ", "want", " ", 
-     "non"}], "-", 
-    RowBox[{"crystallographic", " ", 
-     RowBox[{"ones", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+     "this", " ", "is", " ", "a", " ", "list", " ", "of", " ", "the", " ", 
+      "minimum", " ", "symmetry", " ", "operations", " ", "required", " ", 
+      "to", " ", "define", " ", "the", " ", "32", " ", "crystallographic", 
+      " ", "point", " ", 
+      RowBox[{"groups", ".", " ", "you"}], " ", "may", " ", "add", " ", 
+      "symmetries", " ", "here", " ", "if", " ", "you", " ", "want", " ", 
+      "non"}], "-", 
+     RowBox[{"crystallographic", " ", "ones"}]}], ",", " ", 
+    RowBox[{
+    "just", " ", "specify", " ", "it", " ", "as", " ", "the", " ", "minimal", 
+     " ", "list", " ", "of", " ", "symmetry", " ", "operations"}], ",", " ", 
+    RowBox[{"written", " ", "as", " ", "a", " ", "3", "x3", " ", 
+     RowBox[{"matrix", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
@@ -386,7 +658,7 @@ Cell[BoxData[
     RowBox[{"g2", " ", "=", " ", 
      RowBox[{"{", 
       RowBox[{
-       RowBox[{"IdentityMatrix", "[", "3", "]"}], ",", 
+       RowBox[{"IdentityMatrix", "[", "3", "]"}], ",", " ", 
        RowBox[{"RotationMatrix", "[", 
         RowBox[{"Pi", ",", " ", 
          RowBox[{"{", 
@@ -834,9 +1106,14 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
-    "these", " ", "are", " ", "the", " ", "space", " ", "group", " ", 
-     "options", " ", "displayed", " ", "in", " ", "the", " ", "gui"}], " ", 
-    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+     "these", " ", "are", " ", "the", " ", "space", " ", "group", " ", 
+      "options", " ", "displayed", " ", "in", " ", "the", " ", "gui"}], " ", 
+     "-", " ", 
+     RowBox[{"add", " ", "yours", " ", "here", " ", "if", " ", 
+      RowBox[{"you", "'"}], "ve", " ", "added", " ", "any", " ", 
+      "symmetries"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"symList", " ", "=", " ", 
      RowBox[{"{", 
@@ -847,10 +1124,14 @@ Cell[BoxData[
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
-    "these", " ", "link", " ", "the", " ", "text", " ", "symbol", " ", "for", 
-     " ", "a", " ", "space", " ", "group", " ", "to", " ", "the", " ", 
-     "symmetry", " ", "operations"}], " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+     RowBox[{
+     "these", " ", "link", " ", "the", " ", "text", " ", "symbol", " ", "for",
+       " ", "a", " ", "space", " ", "group", " ", "to", " ", "the", " ", 
+      "symmetry", " ", "operations"}], ",", " ", 
+     RowBox[{
+     "create", " ", "an", " ", "equivalent", " ", "list", " ", "if", " ", 
+      RowBox[{"you", "'"}], "ve", " ", "added", " ", "symmetries"}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"triclinicset", " ", "=", " ", 
      RowBox[{"{", 
@@ -1121,10 +1402,14 @@ Cell[BoxData[
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
-    "these", " ", "determine", " ", "what", " ", "space", " ", "group", " ", 
-     "parameters", " ", "are", " ", "displayed", " ", "in", " ", "the", " ", 
-     RowBox[{"gui", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+     RowBox[{
+     "these", " ", "determine", " ", "what", " ", "space", " ", "group", " ", 
+      "parameters", " ", "are", " ", "displayed", " ", "in", " ", "the", " ", 
+      
+      RowBox[{"gui", ".", " ", "Again"}]}], ",", " ", 
+     RowBox[{"if", " ", "you", " ", "add", " ", "symmetries"}], ",", " ", 
+     RowBox[{"add", " ", "to", " ", "these", " ", "items"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"tricliniccontrols", "[", "symmetry_", "]"}], " ", ":=", "  ", 
@@ -1368,6 +1653,9 @@ Cell[BoxData[
               RowBox[{"triclinicconstants", "[", "sym", "]"}]}], "]"}]}], 
            "]"}]}], "]"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"display", " ", "settings"}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"hkl", "[", "1", "]"}], " ", "=", " ", "\"\< h\>\""}], ";", 
@@ -1393,8 +1681,14 @@ Cell[BoxData[
      RowBox[{"Text", "[", 
       RowBox[{"Style", "[", 
        RowBox[{"\"\<l\>\"", ",", "Italic", ",", "16"}], "]"}], "]"}]}], ";"}],
-    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "everything", " ", "below", " ", "here", " ", "applies", " ", "to", " ", 
+      "the", " ", "wulff", " ", "shape", " ", "calculation"}], ",", " ", 
+     RowBox[{"not", " ", "the", " ", "display"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{
     "these", " ", "functions", " ", "expedite", " ", "the", " ", "wulff", " ",
@@ -1439,22 +1733,29 @@ Cell[BoxData[
            RowBox[{"[", "3", "]"}], "]"}], " ", 
           RowBox[{"testV", "[", 
            RowBox[{"[", "3", "]"}], "]"}]}]}], "  ", ">", " ", 
-        "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", " ", 
         RowBox[{
-         RowBox[{
-          RowBox[{"baseV", "[", 
-           RowBox[{"[", "1", "]"}], "]"}], "^", "2"}], " ", "+", " ", 
-         RowBox[{
-          RowBox[{"baseV", "[", 
-           RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], " ", "+", 
-         RowBox[{
-          RowBox[{"baseV", "[", 
-           RowBox[{"[", "3", "]"}], "]"}], "^", "2"}]}]}]}], " ", "]"}]}], 
-    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(", 
+          RowBox[{"1", " ", "+", " ", 
+           SuperscriptBox["10", 
+            RowBox[{"-", "10."}]]}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"baseV", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "^", "2"}], " ", "+", "  ", 
+           RowBox[{
+            RowBox[{"baseV", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], " ", "+", "  ", 
+           RowBox[{
+            RowBox[{"baseV", "[", 
+             RowBox[{"[", "3", "]"}], "]"}], "^", "2"}]}], ")"}]}]}]}], " ", 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"neighborQ", "[", 
-      RowBox[{"id_", ",", " ", "glist_"}], "]"}], " ", ":=", " ", 
+      RowBox[{"id_", ",", " ", "glist_", ",", " ", "sensitivity_"}], "]"}], 
+     " ", ":=", " ", 
      RowBox[{"Module", "[", 
       RowBox[{
        RowBox[{"{", 
@@ -1499,13 +1800,7 @@ Cell[BoxData[
            RowBox[{"{", 
             RowBox[{"i", ",", " ", 
              RowBox[{"Min", "[", 
-              RowBox[{
-               RowBox[{"Max", "[", 
-                RowBox[{
-                 RowBox[{"Ceiling", "[", 
-                  RowBox[{
-                   RowBox[{"Length", "[", "glist", "]"}], "/", "6"}], "]"}], 
-                 ",", " ", "11"}], "]"}], ",", " ", 
+              RowBox[{"sensitivity", ",", " ", 
                RowBox[{"Length", "[", "glist", "]"}]}], "]"}]}], "}"}]}], 
           "]"}]}], ";", "\[IndentingNewLine]", 
         RowBox[{"fin", " ", "=", " ", 
@@ -2213,7 +2508,13 @@ Cell[BoxData[
    3.546624338720175*^9}, {3.546624387964138*^9, 3.546624426866848*^9}, 
    3.5466244650778427`*^9, {3.5472156303374367`*^9, 3.5472156522368927`*^9}, {
    3.5472167775972853`*^9, 3.5472168001104794`*^9}, {3.547216863567585*^9, 
-   3.54721689563745*^9}}],
+   3.54721689563745*^9}, {3.5484942182691717`*^9, 3.54849422727039*^9}, {
+   3.5496387135202627`*^9, 3.549638945143894*^9}, {3.549639018691341*^9, 
+   3.54963903557061*^9}, {3.551096367014593*^9, 3.5510964417040653`*^9}, {
+   3.5510987553866873`*^9, 3.551098788907921*^9}, {3.5510993273595753`*^9, 
+   3.5510993373478622`*^9}, {3.551099388368581*^9, 3.551099390867062*^9}, {
+   3.551099421461557*^9, 3.551099458129919*^9}, {3.55109949079035*^9, 
+   3.551099519272791*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -2223,11 +2524,11 @@ Cell[BoxData[
    "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-    RowBox[{"wulffmaker", "[", 
+    RowBox[{"wulffmakerWulff", "[", 
      RowBox[{"argument_", ",", " ", 
       RowBox[{"opacity_:", "1"}], ",", " ", 
-      RowBox[{"showAxes_:", "True"}], ",", " ", "vpr_", ",", " ", "vvr_"}], 
-     "]"}], " ", ":=", " ", 
+      RowBox[{"showAxes_:", "True"}], ",", " ", "vpr_", ",", " ", "vvr_", ",",
+       " ", "sensitiv_"}], "]"}], " ", ":=", " ", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -2236,15 +2537,15 @@ Cell[BoxData[
         ",", " ", "geometry", ",", " ", "sym", ",", " ", "geometr", ",", " ", 
         "aa", ",", " ", "bb", ",", " ", "cc", ",", " ", "\[Alpha]\[Alpha]", 
         ",", " ", "\[Beta]\[Beta]", ",", " ", "\[Gamma]\[Gamma]", ",", " ", 
-        "avect", ",", " ", "bvect", ",", " ", "cvect", ",", " ", "normsr", 
-        ",", " ", "normsxyz", ",", " ", "symop", ",", " ", "dmult", ",", " ", 
-        "colz", ",", " ", "gams", ",", " ", "eliminatedQ", ",", " ", 
-        "survivingGroups", ",", " ", "newColors", ",", " ", "newGsPre", ",", 
-        " ", "newGs", ",", " ", "neighbors", ",", " ", "verts", ",", " ", 
-        "verts2", ",", " ", "vertTest", ",", " ", "degs", ",", " ", "axes", 
-        ",", " ", "rotMats", ",", " ", "rotatedVerts", ",", " ", 
-        "sortedVerts", ",", "wulffshape"}], "}"}], ",", "\[IndentingNewLine]",
-       "\[IndentingNewLine]", 
+        "avect", ",", " ", "bvect", ",", " ", "cvect", ",", " ", "cartesian1",
+         ",", " ", "points", ",", " ", "normsxyz", ",", " ", "symop", ",", 
+        " ", "dmult", ",", " ", "colz", ",", " ", "gams", ",", " ", 
+        "eliminatedQ", ",", " ", "survivingGroups", ",", " ", "newColors", 
+        ",", " ", "newGsPre", ",", " ", "newGs", ",", " ", "neighbors", ",", 
+        " ", "verts", ",", " ", "verts2", ",", " ", "vertTest", ",", " ", 
+        "degs", ",", " ", "axes", ",", " ", "rotMats", ",", " ", 
+        "rotatedVerts", ",", " ", "sortedVerts", ",", "wulffshape"}], "}"}], 
+      ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"(*", " ", "definitions", " ", "*)"}], "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"norms", " ", "=", " ", 
@@ -2278,8 +2579,9 @@ Cell[BoxData[
        RowBox[{"(*", " ", 
         RowBox[{
         "converting", " ", "the", " ", "inputs", " ", "from", " ", 
-         "crystallographic", " ", "axes", " ", "to", " ", "cartesian", " ", 
-         "axes"}], " ", "*)"}], "\[IndentingNewLine]", 
+         "crystallographic", " ", "hkl", " ", "planes", " ", "to", " ", 
+         "cartesian", " ", "xyz", " ", "plane", " ", "normals"}], " ", "*)"}],
+        "\[IndentingNewLine]", 
        RowBox[{"aa", " ", "=", " ", 
         RowBox[{"geometry", "[", 
          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
@@ -2329,27 +2631,230 @@ Cell[BoxData[
         RowBox[{"{", 
          RowBox[{"0", ",", " ", "0", ",", " ", "cc"}], "}"}]}], ";", 
        "\[IndentingNewLine]", 
+       RowBox[{"cartesian1", " ", "=", " ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], " ", "\[Equal]", 
+               " ", "0"}], ",", " ", "\"\<Inf\>\"", ",", " ", 
+              RowBox[{"avect", "/", 
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}]}]}], "]"}], ",", 
+            " ", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], " ", "\[Equal]", 
+               " ", "0"}], ",", " ", "\"\<Inf\>\"", ",", " ", 
+              RowBox[{"bvect", "/", 
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}]}]}], "]"}], ",", 
+            " ", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], " ", "\[Equal]", 
+               " ", "0"}], ",", " ", "\"\<Inf\>\"", ",", " ", 
+              RowBox[{"cvect", "/", 
+               RowBox[{"norms", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}]}]}], "]"}]}], 
+           "}"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", " ", "1", ",", " ", 
+            RowBox[{"Length", "[", "norms", "]"}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"points", " ", "=", " ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Which", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "]"}]}], "  ", "&&",
+              " ", 
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], " ", "+", " ", 
+               "avect"}], ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], " ", "+", " ", 
+               "bvect"}], ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "3"}], "]"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "]"}]}], " ", "&&",
+              " ", 
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], " ", "+", " ", 
+               "avect"}], ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "+", "cvect"}]}],
+              "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "]"}]}], " ", "&&",
+              " ", 
+             RowBox[{"!", 
+              RowBox[{"VectorQ", "[", 
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], "]"}]}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "+", "bvect"}], 
+              ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "+", "cvect"}]}],
+              "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"!", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], "+", "avect"}], 
+              ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "3"}], "]"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"!", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "+", "bvect"}], 
+              ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "3"}], "]"}], "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"!", 
+             RowBox[{"VectorQ", "[", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], ",", " ", 
+              RowBox[{"cartesian1", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"cartesian1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "+", "cvect"}]}],
+              "}"}], ",", "\[IndentingNewLine]", "True", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"cartesian1", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+          ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", " ", 
+            RowBox[{"Length", "[", "norms", "]"}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
        RowBox[{"normsxyz", " ", "=", " ", 
         RowBox[{"Table", "[", 
          RowBox[{
-          RowBox[{
+          RowBox[{"Cross", "[", 
            RowBox[{
-            RowBox[{"norms", "[", 
-             RowBox[{"[", 
-              RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], " ", "avect"}], " ",
-            "+", " ", 
-           RowBox[{
-            RowBox[{"norms", "[", 
-             RowBox[{"[", 
-              RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], " ", "bvect"}], " ",
-            "+", " ", 
-           RowBox[{
-            RowBox[{"norms", "[", 
-             RowBox[{"[", 
-              RowBox[{"i", ",", " ", "3"}], "]"}], "]"}], " ", "cvect"}]}], 
-          ",", " ", 
+            RowBox[{
+             RowBox[{"points", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", " ", "1"}], "]"}], "]"}], "-", 
+             RowBox[{"points", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", " ", "2"}], "]"}], "]"}]}], ",", " ", 
+            RowBox[{
+             RowBox[{"points", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", " ", "2"}], "]"}], "]"}], "-", 
+             RowBox[{"points", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", " ", "3"}], "]"}], "]"}]}]}], "]"}], ",", 
+          " ", 
           RowBox[{"{", 
-           RowBox[{"i", ",", " ", "1", ",", " ", 
+           RowBox[{"i", ",", " ", 
             RowBox[{"Length", "[", "norms", "]"}]}], "}"}]}], "]"}]}], ";", 
        "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"(*", " ", 
@@ -2375,9 +2880,13 @@ Cell[BoxData[
                  RowBox[{"Flatten", "[", 
                   RowBox[{"Table", "[", 
                    RowBox[{
+                    RowBox[{"Round", "[", 
+                    RowBox[{
                     RowBox[{"sym", ".", " ", 
                     RowBox[{"#", "[", 
                     RowBox[{"[", "i", "]"}], "]"}]}], ",", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "10."}]]}], "]"}], ",", " ", 
                     RowBox[{"{", 
                     RowBox[{"i", ",", " ", "1", ",", " ", 
                     RowBox[{"Length", "[", "#", "]"}]}], "}"}]}], "]"}], 
@@ -2577,7 +3086,8 @@ Cell[BoxData[
         RowBox[{"Table", "[", 
          RowBox[{
           RowBox[{"neighborQ", "[", 
-           RowBox[{"i", ",", " ", "newGs"}], "]"}], ",", " ", 
+           RowBox[{"i", ",", " ", "newGs", ",", " ", "sensitiv"}], "]"}], ",",
+           " ", 
           RowBox[{"{", 
            RowBox[{"i", ",", " ", 
             RowBox[{"Length", "[", "newGs", "]"}]}], "}"}]}], "]"}]}], ";", 
@@ -2808,7 +3318,7 @@ Cell[BoxData[
        ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"(*", " ", 
         RowBox[{"this", " ", "generates", " ", "the", " ", "graphics"}], " ", 
-        "*)"}], "\[IndentingNewLine]", 
+        "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"wulffshape", " ", "=", " ", 
         RowBox[{"Graphics3D", "[", 
          RowBox[{
@@ -2927,7 +3437,15 @@ Cell[BoxData[
    3.5417610068920393`*^9, 3.5417610394852533`*^9}, {3.5417612626509047`*^9, 
    3.541761279857033*^9}, {3.546623968855193*^9, 3.5466242776911993`*^9}, {
    3.547215675258374*^9, 3.5472157359023533`*^9}, {3.54721680738655*^9, 
-   3.547216816159371*^9}, {3.547216905403667*^9, 3.54721696554393*^9}}]
+   3.547216816159371*^9}, {3.547216905403667*^9, 3.54721696554393*^9}, {
+   3.548493877138135*^9, 3.5484940261513042`*^9}, {3.548494086710195*^9, 
+   3.548494108806965*^9}, {3.548494200307661*^9, 3.548494239281609*^9}, {
+   3.5510964811959267`*^9, 3.551096535687788*^9}, {3.5510966870111732`*^9, 
+   3.551096689928055*^9}, {3.5510981357350073`*^9, 3.5510981748795233`*^9}, {
+   3.551098205447667*^9, 3.551098232959543*^9}, {3.5510982664787397`*^9, 
+   3.551098344178213*^9}, {3.551098386651927*^9, 3.551098402338821*^9}, {
+   3.55109852488778*^9, 3.551098554219777*^9}, {3.551098618705453*^9, 
+   3.5510986189782677`*^9}, {3.551099583259701*^9, 3.551099586656608*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -3053,11 +3571,15 @@ Cell[BoxData[
          RowBox[{
           RowBox[{"Manipulate", "[", 
            RowBox[{
-            RowBox[{"wulffmaker", "[", " ", 
+            RowBox[{"wulffmakerWulff", "[", " ", 
              RowBox[{
              "argument", ",", "opacity", ",", "showAxes", ",", " ", "vp", ",",
-               " ", "vv"}], "]"}], ",", " ", "controls"}], "]"}], ",", "gc"}],
-          "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+               " ", "vv", ",", " ", "sensitivity"}], "]"}], ",", " ", 
+            "controls", ",", " ", 
+            RowBox[{"SynchronousUpdating", " ", "\[Rule]", " ", "False"}]}], 
+           "]"}], ",", "gc", ",", " ", 
+          RowBox[{"SynchronousUpdating", " ", "\[Rule]", " ", "False"}]}], 
+         "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"{", 
@@ -3130,6 +3652,15 @@ Cell[BoxData[
         
         RowBox[{"ControlPlacement", " ", "\[Rule]", " ", "Top"}]}], "}"}], 
       ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"sensitivity", ",", "18", ",", 
+          RowBox[{"Text", "[", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<Sensitivity\>\"", ",", "16"}], "]"}], "]"}]}], "}"}],
+         ",", "10", ",", "50", ",", " ", "1"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{"FrameLabel", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"None", ",", "None", ",", 
@@ -3138,8 +3669,9 @@ Cell[BoxData[
            RowBox[{"\"\<Wulffmaker\>\"", ",", "Italic", ",", "32"}], "]"}], 
           "]"}]}], "}"}]}], ",", 
       RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}], ",", 
-      RowBox[{"BaseStyle", "\[Rule]", " ", "Large"}]}], "]"}]}], 
-   "\[IndentingNewLine]", "]"}]}]], "Input",
+      RowBox[{"BaseStyle", "\[Rule]", " ", "Large"}], ",", " ", 
+      RowBox[{"SynchronousUpdating", " ", "\[Rule]", " ", "False"}]}], 
+     "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.54176016012558*^9, 3.541760165934205*^9}, {
    3.541760349643058*^9, 3.541760371241598*^9}, {3.54176046708435*^9, 
@@ -3152,19 +3684,26 @@ Cell[BoxData[
    3.543938263535564*^9}, {3.54635941971443*^9, 3.5463594642802277`*^9}, {
    3.546622585392272*^9, 3.5466225889998083`*^9}, {3.5472157520090923`*^9, 
    3.547215782652728*^9}, 3.547215900013783*^9, {3.5472159508633833`*^9, 
-   3.547215951317255*^9}, {3.5472169788418427`*^9, 3.5472169859418488`*^9}}],
+   3.547215951317255*^9}, {3.5472169788418427`*^9, 3.5472169859418488`*^9}, {
+   3.548387978280834*^9, 3.5483879979364*^9}, {3.548494139569435*^9, 
+   3.548494191396674*^9}, {3.548494242885399*^9, 3.54849424377124*^9}, {
+   3.549363755411315*^9, 3.549363758993593*^9}, 3.551097710539732*^9, 
+   3.551097897695099*^9, 3.551097934698172*^9, 3.551098126445525*^9, 
+   3.551098187106923*^9, {3.551098623665594*^9, 3.551098624726104*^9}, {
+   3.551104573754328*^9, 3.551104573895656*^9}, {3.5511112281948*^9, 
+   3.551111229745405*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`currentSymmetry$$ = 
     "m\!\(\*OverscriptBox[\(3\), \(_\)]\)m", $CellContext`n$$ = 
-    3, $CellContext`opacity$$ = 0.85, $CellContext`showAxes$$ = 
-    True, $CellContext`symmetry$$ = "Cubic", $CellContext`vp$$ = {5, 1, 
-    1}, $CellContext`vv$$ = {0, 0, 1}, Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{{
+    3, $CellContext`opacity$$ = 0.85, $CellContext`sensitivity$$ = 
+    18, $CellContext`showAxes$$ = True, $CellContext`symmetry$$ = 
+    "Cubic", $CellContext`vp$$ = {5, 1, 1}, $CellContext`vv$$ = {0, 0, 1}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`symmetry$$], "Cubic", 
        Text[
         Style["Lattice", 16]]}, {
@@ -3192,36 +3731,41 @@ Cell[BoxData[
         Style["Zone Axis", 16]]}}, {{
        Hold[$CellContext`vv$$], {0, 0, 1}, 
        Text[
-        Style["Vertical Direction", 16]]}}}, Typeset`size$$ = {
+        Style["Vertical Direction", 16]]}}, {{
+       Hold[$CellContext`sensitivity$$], 18, 
+       Text[
+        Style["Sensitivity", 16]]}, 10, 50, 1}}, Typeset`size$$ = {
     1129., {361., 371.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = False, $CellContext`symmetry$12691$$ = 
-    0, $CellContext`n$12692$$ = 0, $CellContext`opacity$12693$$ = 
-    0, $CellContext`showAxes$12694$$ = False}, 
+    Typeset`skipInitDone$$ = False, $CellContext`symmetry$1968$$ = 
+    0, $CellContext`n$1969$$ = 0, $CellContext`opacity$1970$$ = 
+    0, $CellContext`showAxes$1971$$ = False, $CellContext`sensitivity$1972$$ =
+     0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`currentSymmetry$$ = 
         "m\!\(\*OverscriptBox[\(3\), \(_\)]\)m", $CellContext`n$$ = 
-        3, $CellContext`opacity$$ = 0.85, $CellContext`showAxes$$ = 
-        True, $CellContext`symmetry$$ = 
+        3, $CellContext`opacity$$ = 0.85, $CellContext`sensitivity$$ = 
+        18, $CellContext`showAxes$$ = True, $CellContext`symmetry$$ = 
         "Cubic", $CellContext`vp$$ = {5, 1, 1}, $CellContext`vv$$ = {0, 0, 
          1}}, "ControllerVariables" :> {
-        Hold[$CellContext`symmetry$$, $CellContext`symmetry$12691$$, 0], 
-        Hold[$CellContext`n$$, $CellContext`n$12692$$, 0], 
-        Hold[$CellContext`opacity$$, $CellContext`opacity$12693$$, 0], 
-        Hold[$CellContext`showAxes$$, $CellContext`showAxes$12694$$, False]}, 
-      "OtherVariables" :> {
+        Hold[$CellContext`symmetry$$, $CellContext`symmetry$1968$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$1969$$, 0], 
+        Hold[$CellContext`opacity$$, $CellContext`opacity$1970$$, 0], 
+        Hold[$CellContext`showAxes$$, $CellContext`showAxes$1971$$, False], 
+        Hold[$CellContext`sensitivity$$, $CellContext`sensitivity$1972$$, 0]},
+       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
          Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`argument$ = {
            Table[
-            $CellContext`normal$12689[$CellContext`i, $CellContext`j], \
+            $CellContext`normal$1966[$CellContext`i, $CellContext`j], \
 {$CellContext`i, 1, $CellContext`n$$}, {$CellContext`j, 1, 3}], 
            Table[
-            $CellContext`magnitudes$12689[$CellContext`i], {$CellContext`i, 
+            $CellContext`magnitudes$1966[$CellContext`i], {$CellContext`i, 
              1, $CellContext`n$$}], 
            Table[
-            $CellContext`colors$12689[$CellContext`i], {$CellContext`i, 
+            $CellContext`colors$1966[$CellContext`i], {$CellContext`i, 
              1, $CellContext`n$$}], $CellContext`currentSymmetry$$, 
            $CellContext`geomgen[$CellContext`symmetry$$]}, $CellContext`gc$ = \
 $CellContext`whichcontrols[$CellContext`symmetry$$], $CellContext`controls$ = 
@@ -3230,14 +3774,14 @@ $CellContext`whichcontrols[$CellContext`symmetry$$], $CellContext`controls$ =
             Flatten[
              Table[
               Which[$CellContext`j <= 3, {{
-                 $CellContext`normal$12689[$CellContext`i, $CellContext`j], 
+                 $CellContext`normal$1966[$CellContext`i, $CellContext`j], 
                  $CellContext`pickIndex[$CellContext`i, $CellContext`j], 
                  $CellContext`hkl[$CellContext`j]}, ControlPlacement -> 
                 Left}, $CellContext`j == 4, {{
-                 $CellContext`colors$12689[$CellContext`i], 
+                 $CellContext`colors$1966[$CellContext`i], 
                  $CellContext`pickColor[$CellContext`i], ""}, 
                 Hue[0.1], ControlPlacement -> Left}, $CellContext`j >= 5, {{
-                 $CellContext`magnitudes$12689[$CellContext`i], 
+                 $CellContext`magnitudes$1966[$CellContext`i], 
                  $CellContext`pickGamma[$CellContext`i], 
                  Text[
                   Style["\[Gamma]", 16]]}, 0.4, 2, Appearance -> "Labeled", 
@@ -3246,9 +3790,11 @@ $CellContext`whichcontrols[$CellContext`symmetry$$], $CellContext`controls$ =
             6]]}, 
         Manipulate[
          Manipulate[
-          $CellContext`wulffmaker[$CellContext`argument$, \
+          $CellContext`wulffmakerWulff[$CellContext`argument$, \
 $CellContext`opacity$$, $CellContext`showAxes$$, $CellContext`vp$$, \
-$CellContext`vv$$], $CellContext`controls$], $CellContext`gc$]], 
+$CellContext`vv$$, $CellContext`sensitivity$$], $CellContext`controls$, 
+          SynchronousUpdating -> False], $CellContext`gc$, 
+         SynchronousUpdating -> False]], 
       "Specifications" :> {{{$CellContext`symmetry$$, "Cubic", 
           Text[
            Style["Lattice", 16]]}, {
@@ -3274,18 +3820,21 @@ $CellContext`vv$$], $CellContext`controls$], $CellContext`gc$]],
          ControlPlacement -> Top}, {{$CellContext`vv$$, {0, 0, 1}, 
           Text[
            Style["Vertical Direction", 16]]}, ControlType -> InputField, 
-         ControlPlacement -> Top}}, "Options" :> {FrameLabel -> {None, None, 
+         ControlPlacement -> Top}, {{$CellContext`sensitivity$$, 18, 
           Text[
-           Style["Wulffmaker", Italic, 32]]}, BaseStyle -> Large}, 
-      "DefaultOptions" :> {}],
-     ImageSizeCache->{1180., {512., 523.}},
+           Style["Sensitivity", 16]]}, 10, 50, 1}}, 
+      "Options" :> {FrameLabel -> {None, None, 
+          Text[
+           Style["Wulffmaker", Italic, 32]]}, BaseStyle -> Large, 
+        SynchronousUpdating -> False}, "DefaultOptions" :> {}],
+     ImageSizeCache->{1180., {526., 537.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
     Initialization:>({
-      Attributes[$CellContext`normal$12689] = {Temporary}, $CellContext`i = 1,
-        Attributes[$CellContext`magnitudes$12689] = {Temporary}, 
-       Attributes[$CellContext`colors$12689] = {
+      Attributes[$CellContext`normal$1966] = {Temporary}, 
+       Attributes[$CellContext`magnitudes$1966] = {Temporary}, 
+       Attributes[$CellContext`colors$1966] = {
         Temporary}, $CellContext`geomgen[
          Pattern[$CellContext`sym, 
           Blank[]]] := If[
@@ -3411,7 +3960,7 @@ $CellContext`hexagonalcontrols[
          Pattern[$CellContext`i, 
           Blank[]]] := 
        Which[$CellContext`i == 1, 1, $CellContext`i == 2, 1, $CellContext`i == 
-         3, 1, True, 1], $CellContext`wulffmaker[
+         3, 1, True, 1], $CellContext`wulffmakerWulff[
          Pattern[$CellContext`argument, 
           Blank[]], 
          Optional[
@@ -3423,14 +3972,16 @@ $CellContext`hexagonalcontrols[
          Pattern[$CellContext`vpr, 
           Blank[]], 
          Pattern[$CellContext`vvr, 
+          Blank[]], 
+         Pattern[$CellContext`sensitiv, 
           Blank[]]] := 
        Module[{$CellContext`norms, $CellContext`ds, $CellContext`colors, \
 $CellContext`symstring, $CellContext`geometry, $CellContext`sym, \
 $CellContext`geometr, $CellContext`aa, $CellContext`bb, $CellContext`cc, \
 $CellContext`\[Alpha]\[Alpha], $CellContext`\[Beta]\[Beta], $CellContext`\
 \[Gamma]\[Gamma], $CellContext`avect, $CellContext`bvect, $CellContext`cvect, \
-$CellContext`normsr, $CellContext`normsxyz, $CellContext`symop, \
-$CellContext`dmult, $CellContext`colz, $CellContext`gams, \
+$CellContext`cartesian1, $CellContext`points, $CellContext`normsxyz, \
+$CellContext`symop, $CellContext`dmult, $CellContext`colz, $CellContext`gams, \
 $CellContext`eliminatedQ, $CellContext`survivingGroups, \
 $CellContext`newColors, $CellContext`newGsPre, $CellContext`newGs, \
 $CellContext`neighbors, $CellContext`verts, $CellContext`verts2, \
@@ -3463,20 +4014,97 @@ $CellContext`symmetryMatrices[$CellContext`symstring]; $CellContext`aa =
             Sin[$CellContext`\[Alpha]\[Alpha]] 
             Sin[$CellContext`\[Gamma]\[Gamma]], $CellContext`bb 
             Cos[$CellContext`\[Alpha]\[Alpha]]}; $CellContext`cvect = {
-           0, 0, $CellContext`cc}; $CellContext`normsxyz = 
-          Table[Part[$CellContext`norms, $CellContext`i, 
-               1] $CellContext`avect + 
-            Part[$CellContext`norms, $CellContext`i, 2] $CellContext`bvect + 
-            Part[$CellContext`norms, $CellContext`i, 
-               3] $CellContext`cvect, {$CellContext`i, 1, 
+           0, 0, $CellContext`cc}; $CellContext`cartesian1 = Table[{
+             If[
+             Part[$CellContext`norms, $CellContext`i, 1] == 0, 
+              "Inf", $CellContext`avect/
+              Part[$CellContext`norms, $CellContext`i, 1]], 
+             If[
+             Part[$CellContext`norms, $CellContext`i, 2] == 0, 
+              "Inf", $CellContext`bvect/
+              Part[$CellContext`norms, $CellContext`i, 2]], 
+             If[
+             Part[$CellContext`norms, $CellContext`i, 3] == 0, 
+              "Inf", $CellContext`cvect/
+              Part[$CellContext`norms, $CellContext`i, 3]]}, {$CellContext`i, 
+             1, 
+             Length[$CellContext`norms]}]; $CellContext`points = Table[
+            Which[
+             And[
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 1]]], 
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 2]]]], {
+             Part[$CellContext`cartesian1, $CellContext`i, 
+                3] + $CellContext`avect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                3] + $CellContext`bvect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 3]}, 
+             And[
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 1]]], 
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 3]]]], {
+             Part[$CellContext`cartesian1, $CellContext`i, 
+                2] + $CellContext`avect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 2], 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                2] + $CellContext`cvect}, 
+             And[
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 2]]], 
+              Not[
+               VectorQ[
+                Part[$CellContext`cartesian1, $CellContext`i, 3]]]], {
+              Part[$CellContext`cartesian1, $CellContext`i, 1], 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                1] + $CellContext`bvect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                1] + $CellContext`cvect}, 
+             Not[
+              VectorQ[
+               Part[$CellContext`cartesian1, $CellContext`i, 1]]], {
+             Part[$CellContext`cartesian1, $CellContext`i, 
+                3] + $CellContext`avect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 2], 
+              Part[$CellContext`cartesian1, $CellContext`i, 3]}, 
+             Not[
+              VectorQ[
+               Part[$CellContext`cartesian1, $CellContext`i, 2]]], {
+              Part[$CellContext`cartesian1, $CellContext`i, 1], 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                1] + $CellContext`bvect, 
+              Part[$CellContext`cartesian1, $CellContext`i, 3]}, 
+             Not[
+              VectorQ[
+               Part[$CellContext`cartesian1, $CellContext`i, 3]]], {
+              Part[$CellContext`cartesian1, $CellContext`i, 1], 
+              Part[$CellContext`cartesian1, $CellContext`i, 2], 
+              Part[$CellContext`cartesian1, $CellContext`i, 
+                2] + $CellContext`cvect}, True, 
+             Part[$CellContext`cartesian1, $CellContext`i]], {$CellContext`i, 
+             
+             Length[$CellContext`norms]}]; $CellContext`normsxyz = Table[
+            Cross[
+            Part[$CellContext`points, $CellContext`i, 1] - 
+             Part[$CellContext`points, $CellContext`i, 2], 
+             Part[$CellContext`points, $CellContext`i, 2] - 
+             Part[$CellContext`points, $CellContext`i, 3]], {$CellContext`i, 
              Length[$CellContext`norms]}]; $CellContext`symop = Table[
             FixedPoint[Simplify[
               Union[
                Partition[
                 Flatten[
                  Table[
-                  Dot[$CellContext`sym, 
-                   Part[#, $CellContext`i]], {$CellContext`i, 1, 
+                  Round[
+                   Dot[$CellContext`sym, 
+                    Part[#, $CellContext`i]], 10^(-10.)], {$CellContext`i, 1, 
+                   
                    Length[#]}]], 3]]]& , 
              Dot[$CellContext`sym, 
               Part[$CellContext`normsxyz, $CellContext`j]]], {$CellContext`j, 
@@ -3543,8 +4171,8 @@ $CellContext`i}, {$CellContext`i, $CellContext`survivingGroups}, \
              Part[$CellContext`newGsPre, $CellContext`i], {$CellContext`i}], \
 {$CellContext`i, 
              Length[$CellContext`newGsPre]}]; $CellContext`neighbors = Table[
-            $CellContext`neighborQ[$CellContext`i, $CellContext`newGs], \
-{$CellContext`i, 
+            $CellContext`neighborQ[$CellContext`i, $CellContext`newGs, \
+$CellContext`sensitiv], {$CellContext`i, 
              Length[$CellContext`newGs]}]; $CellContext`verts = Table[{
              $CellContext`findvert[
               Part[$CellContext`newGs, $CellContext`i, 1], 
@@ -3749,29 +4377,31 @@ $CellContext`j, 2], 1], {$CellContext`j,
        CompiledFunction[{8, 8., 5468}, {{
            Blank[Real], 1}, {
            Blank[Real], 1}}, {{3, 1, 0}, {3, 1, 1}, {1, 0, 
-         0}}, {{2, {2, 0, 1}}, {1, {2, 0, 0}}, {7., {3, 0, 7}}, {
-          3, {2, 0, 2}}}, {1, 3, 8, 0, 
+         0}}, {{1.0000000001, {3, 0, 7}}, {2, {2, 0, 1}}, {1, {2, 0, 0}}, {
+          7., {3, 0, 8}}, {3, {2, 0, 2}}}, {1, 3, 9, 0, 
          2}, {{38, 0, 0, 0, 0, 0}, {38, 0, 0, 1, 0, 1}, {38, 0, 0, 2, 0, 2}, {
           38, 1, 0, 0, 0, 3}, {16, 0, 3, 4}, {38, 1, 0, 1, 0, 3}, {16, 1, 3, 
           5}, {38, 1, 0, 2, 0, 3}, {16, 2, 3, 6}, {13, 4, 5, 6, 4}, {40, 56, 
-          3, 0, 0, 3, 0, 5}, {40, 56, 3, 0, 1, 3, 0, 6}, {40, 56, 3, 0, 2, 3, 
-          0, 3}, {13, 5, 6, 3, 5}, {27, 7, 7, 4, 5, 0}, {1}}, 
+          3, 0, 0, 3, 0, 6}, {40, 56, 3, 0, 1, 3, 0, 3}, {40, 56, 3, 0, 2, 3, 
+          0, 5}, {13, 6, 3, 5, 6}, {16, 7, 6, 3}, {27, 7, 8, 4, 3, 0}, {1}}, 
          Function[{$CellContext`baseV, $CellContext`testV}, 
           
-          Block[{Compile`$23, Compile`$36, Compile`$40}, 
-           Compile`$23 = Part[$CellContext`baseV, 1]; 
-           Compile`$36 = Part[$CellContext`baseV, 2]; 
-           Compile`$40 = Part[$CellContext`baseV, 3]; 
-           Compile`$23 Part[$CellContext`testV, 1] + 
-             Compile`$36 Part[$CellContext`testV, 2] + 
-             Compile`$40 Part[$CellContext`testV, 3] > 
-            Compile`$23^2 + Compile`$36^2 + Compile`$40^2]], Evaluate], 
-       Attributes[Compile`$23] = {Temporary}, 
-       Attributes[Compile`$36] = {Temporary}, 
-       Attributes[Compile`$40] = {Temporary}, $CellContext`neighborQ[
+          Block[{Compile`$8, Compile`$16, Compile`$20}, 
+           Compile`$8 = Part[$CellContext`baseV, 1]; 
+           Compile`$16 = Part[$CellContext`baseV, 2]; 
+           Compile`$20 = Part[$CellContext`baseV, 3]; 
+           Compile`$8 Part[$CellContext`testV, 1] + 
+             Compile`$16 Part[$CellContext`testV, 2] + 
+             Compile`$20 Part[$CellContext`testV, 3] > 
+            1.0000000001 (Compile`$8^2 + Compile`$16^2 + Compile`$20^2)]], 
+         Evaluate], Attributes[Compile`$8] = {Temporary}, 
+       Attributes[Compile`$16] = {Temporary}, 
+       Attributes[Compile`$20] = {Temporary}, $CellContext`neighborQ[
          Pattern[$CellContext`id, 
           Blank[]], 
          Pattern[$CellContext`glist, 
+          Blank[]], 
+         Pattern[$CellContext`sensitivity, 
           Blank[]]] := 
        Module[{$CellContext`dots, $CellContext`sorted, \
 $CellContext`neighbors, $CellContext`fin}, $CellContext`dots = Table[{
@@ -3785,9 +4415,7 @@ $CellContext`neighbors, $CellContext`fin}, $CellContext`dots = Table[{
           Sort[$CellContext`dots, Part[#, 1] > 
             Part[#2, 1]& ]; $CellContext`neighbors = Table[
             Part[$CellContext`sorted, $CellContext`i, 2], {$CellContext`i, 
-             Min[
-              Max[
-               Ceiling[Length[$CellContext`glist]/6], 11], 
+             Min[$CellContext`sensitivity, 
               Length[$CellContext`glist]]}]; $CellContext`fin = 
           Select[$CellContext`neighbors, 
             Not[# === $CellContext`id]& ]], $CellContext`findvert = 
@@ -3845,10 +4473,10 @@ $CellContext`neighbors, $CellContext`fin}, $CellContext`dots = Table[{
           42, "CopyTensor", 3, 1, 4, 3, 1, 5}, {1}}, 
          Function[{$CellContext`a, $CellContext`b, $CellContext`c}, 
           
-          Block[{Compile`$37, Compile`$39, Compile`$29, Compile`$30, 
-            Compile`$56, Compile`$48, Compile`$46, Compile`$75, Compile`$54, 
-            Compile`$55, Compile`$63, Compile`$64, Compile`$79, Compile`$66, 
-            Compile`$69, Compile`$60, Compile`$71, Compile`$89, Compile`$94}, 
+          Block[{Compile`$17, Compile`$19, Compile`$11, Compile`$12, 
+            Compile`$34, Compile`$27, Compile`$25, Compile`$53, Compile`$32, 
+            Compile`$33, Compile`$41, Compile`$42, Compile`$57, Compile`$44, 
+            Compile`$47, Compile`$38, Compile`$49, Compile`$67, Compile`$72}, 
            
            
            Block[{$CellContext`denom = 
@@ -3864,85 +4492,85 @@ $CellContext`neighbors, $CellContext`fin}, $CellContext`dots = Table[{
               Part[$CellContext`b, 2] Part[$CellContext`c, 3]}, 
             If[
             Abs[$CellContext`denom] < 1.*^-12, {1.*^6, 1.*^6, 1.*^6}, 
-             Compile`$37 = Part[$CellContext`c, 1]; 
-             Compile`$39 = Compile`$37^2; 
-             Compile`$29 = Part[$CellContext`a, 3]; 
-             Compile`$30 = Part[$CellContext`b, 2]; 
-             Compile`$56 = Part[$CellContext`c, 2]; 
-             Compile`$48 = Part[$CellContext`b, 3]; 
-             Compile`$46 = Part[$CellContext`a, 2]; 
-             Compile`$75 = Compile`$56^2; 
-             Compile`$54 = Part[$CellContext`b, 1]; 
-             Compile`$55 = Compile`$54^2; 
-             Compile`$63 = Part[$CellContext`a, 1]; 
-             Compile`$64 = Compile`$63^2; 
-             Compile`$79 = Part[$CellContext`c, 3]; 
-             Compile`$66 = Compile`$46^2; Compile`$69 = Compile`$29^2; 
-             Compile`$60 = Compile`$30^2; Compile`$71 = Compile`$48^2; 
-             Compile`$89 = Compile`$79^2; 
-             Compile`$94 = $CellContext`denom^(-1); {(
-                Compile`$29 Compile`$30 Compile`$39 - Compile`$46 Compile`$48 
-                Compile`$39 - Compile`$29 Compile`$55 Compile`$56 - 
-                Compile`$29 Compile`$60 Compile`$56 + 
-                Compile`$64 Compile`$48 Compile`$56 + 
-                Compile`$66 Compile`$48 Compile`$56 + 
-                Compile`$69 Compile`$48 Compile`$56 - Compile`$29 Compile`$71 
-                Compile`$56 + Compile`$29 Compile`$30 Compile`$75 - 
-                Compile`$46 Compile`$48 Compile`$75 + 
-                Compile`$46 Compile`$55 Compile`$79 - Compile`$64 Compile`$30 
-                Compile`$79 - Compile`$66 Compile`$30 Compile`$79 - 
-                Compile`$69 Compile`$30 Compile`$79 + 
-                Compile`$46 Compile`$60 Compile`$79 + 
-                Compile`$46 Compile`$71 Compile`$79 + 
-                Compile`$29 Compile`$30 Compile`$89 - Compile`$46 Compile`$48 
-                Compile`$89) 
-               Compile`$94, (Compile`$29 Compile`$55 Compile`$37 + 
-                Compile`$29 Compile`$60 Compile`$37 - Compile`$64 Compile`$48 
-                Compile`$37 - Compile`$66 Compile`$48 Compile`$37 - 
-                Compile`$69 Compile`$48 Compile`$37 + 
-                Compile`$29 Compile`$71 Compile`$37 - Compile`$29 Compile`$54 
-                Compile`$39 + Compile`$63 Compile`$48 Compile`$39 - 
-                Compile`$29 Compile`$54 Compile`$75 + 
-                Compile`$63 Compile`$48 Compile`$75 + 
-                Compile`$64 Compile`$54 Compile`$79 + 
-                Compile`$66 Compile`$54 Compile`$79 + 
-                Compile`$69 Compile`$54 Compile`$79 - Compile`$63 Compile`$55 
-                Compile`$79 - Compile`$63 Compile`$60 Compile`$79 - 
-                Compile`$63 Compile`$71 Compile`$79 - Compile`$29 Compile`$54 
-                Compile`$89 + Compile`$63 Compile`$48 Compile`$89) 
-               Compile`$94, ((-Compile`$46) Compile`$55 Compile`$37 + 
-                Compile`$64 Compile`$30 Compile`$37 + 
-                Compile`$66 Compile`$30 Compile`$37 + 
-                Compile`$69 Compile`$30 Compile`$37 - Compile`$46 Compile`$60 
-                Compile`$37 - Compile`$46 Compile`$71 Compile`$37 + 
-                Compile`$46 Compile`$54 Compile`$39 - Compile`$63 Compile`$30 
-                Compile`$39 - Compile`$64 Compile`$54 Compile`$56 - 
-                Compile`$66 Compile`$54 Compile`$56 - Compile`$69 Compile`$54 
-                Compile`$56 + Compile`$63 Compile`$55 Compile`$56 + 
-                Compile`$63 Compile`$60 Compile`$56 + 
-                Compile`$63 Compile`$71 Compile`$56 + 
-                Compile`$46 Compile`$54 Compile`$75 - Compile`$63 Compile`$30 
-                Compile`$75 + Compile`$46 Compile`$54 Compile`$89 - 
-                Compile`$63 Compile`$30 Compile`$89) Compile`$94}]]]], 
-         Evaluate], Attributes[Compile`$37] = {Temporary}, 
-       Attributes[Compile`$39] = {Temporary}, 
-       Attributes[Compile`$29] = {Temporary}, 
-       Attributes[Compile`$30] = {Temporary}, 
-       Attributes[Compile`$56] = {Temporary}, 
-       Attributes[Compile`$48] = {Temporary}, 
-       Attributes[Compile`$46] = {Temporary}, 
-       Attributes[Compile`$75] = {Temporary}, 
-       Attributes[Compile`$54] = {Temporary}, 
-       Attributes[Compile`$55] = {Temporary}, 
-       Attributes[Compile`$63] = {Temporary}, 
-       Attributes[Compile`$64] = {Temporary}, 
-       Attributes[Compile`$79] = {Temporary}, 
-       Attributes[Compile`$66] = {Temporary}, 
-       Attributes[Compile`$69] = {Temporary}, 
-       Attributes[Compile`$60] = {Temporary}, 
-       Attributes[Compile`$71] = {Temporary}, 
-       Attributes[Compile`$89] = {Temporary}, 
-       Attributes[Compile`$94] = {Temporary}, $CellContext`groupSet[
+             Compile`$17 = Part[$CellContext`c, 1]; 
+             Compile`$19 = Compile`$17^2; 
+             Compile`$11 = Part[$CellContext`a, 3]; 
+             Compile`$12 = Part[$CellContext`b, 2]; 
+             Compile`$34 = Part[$CellContext`c, 2]; 
+             Compile`$27 = Part[$CellContext`b, 3]; 
+             Compile`$25 = Part[$CellContext`a, 2]; 
+             Compile`$53 = Compile`$34^2; 
+             Compile`$32 = Part[$CellContext`b, 1]; 
+             Compile`$33 = Compile`$32^2; 
+             Compile`$41 = Part[$CellContext`a, 1]; 
+             Compile`$42 = Compile`$41^2; 
+             Compile`$57 = Part[$CellContext`c, 3]; 
+             Compile`$44 = Compile`$25^2; Compile`$47 = Compile`$11^2; 
+             Compile`$38 = Compile`$12^2; Compile`$49 = Compile`$27^2; 
+             Compile`$67 = Compile`$57^2; 
+             Compile`$72 = $CellContext`denom^(-1); {(
+                Compile`$11 Compile`$12 Compile`$19 - Compile`$25 Compile`$27 
+                Compile`$19 - Compile`$11 Compile`$33 Compile`$34 - 
+                Compile`$11 Compile`$38 Compile`$34 + 
+                Compile`$42 Compile`$27 Compile`$34 + 
+                Compile`$44 Compile`$27 Compile`$34 + 
+                Compile`$47 Compile`$27 Compile`$34 - Compile`$11 Compile`$49 
+                Compile`$34 + Compile`$11 Compile`$12 Compile`$53 - 
+                Compile`$25 Compile`$27 Compile`$53 + 
+                Compile`$25 Compile`$33 Compile`$57 - Compile`$42 Compile`$12 
+                Compile`$57 - Compile`$44 Compile`$12 Compile`$57 - 
+                Compile`$47 Compile`$12 Compile`$57 + 
+                Compile`$25 Compile`$38 Compile`$57 + 
+                Compile`$25 Compile`$49 Compile`$57 + 
+                Compile`$11 Compile`$12 Compile`$67 - Compile`$25 Compile`$27 
+                Compile`$67) 
+               Compile`$72, (Compile`$11 Compile`$33 Compile`$17 + 
+                Compile`$11 Compile`$38 Compile`$17 - Compile`$42 Compile`$27 
+                Compile`$17 - Compile`$44 Compile`$27 Compile`$17 - 
+                Compile`$47 Compile`$27 Compile`$17 + 
+                Compile`$11 Compile`$49 Compile`$17 - Compile`$11 Compile`$32 
+                Compile`$19 + Compile`$41 Compile`$27 Compile`$19 - 
+                Compile`$11 Compile`$32 Compile`$53 + 
+                Compile`$41 Compile`$27 Compile`$53 + 
+                Compile`$42 Compile`$32 Compile`$57 + 
+                Compile`$44 Compile`$32 Compile`$57 + 
+                Compile`$47 Compile`$32 Compile`$57 - Compile`$41 Compile`$33 
+                Compile`$57 - Compile`$41 Compile`$38 Compile`$57 - 
+                Compile`$41 Compile`$49 Compile`$57 - Compile`$11 Compile`$32 
+                Compile`$67 + Compile`$41 Compile`$27 Compile`$67) 
+               Compile`$72, ((-Compile`$25) Compile`$33 Compile`$17 + 
+                Compile`$42 Compile`$12 Compile`$17 + 
+                Compile`$44 Compile`$12 Compile`$17 + 
+                Compile`$47 Compile`$12 Compile`$17 - Compile`$25 Compile`$38 
+                Compile`$17 - Compile`$25 Compile`$49 Compile`$17 + 
+                Compile`$25 Compile`$32 Compile`$19 - Compile`$41 Compile`$12 
+                Compile`$19 - Compile`$42 Compile`$32 Compile`$34 - 
+                Compile`$44 Compile`$32 Compile`$34 - Compile`$47 Compile`$32 
+                Compile`$34 + Compile`$41 Compile`$33 Compile`$34 + 
+                Compile`$41 Compile`$38 Compile`$34 + 
+                Compile`$41 Compile`$49 Compile`$34 + 
+                Compile`$25 Compile`$32 Compile`$53 - Compile`$41 Compile`$12 
+                Compile`$53 + Compile`$25 Compile`$32 Compile`$67 - 
+                Compile`$41 Compile`$12 Compile`$67) Compile`$72}]]]], 
+         Evaluate], Attributes[Compile`$17] = {Temporary}, 
+       Attributes[Compile`$19] = {Temporary}, 
+       Attributes[Compile`$11] = {Temporary}, 
+       Attributes[Compile`$12] = {Temporary}, 
+       Attributes[Compile`$34] = {Temporary}, 
+       Attributes[Compile`$27] = {Temporary}, 
+       Attributes[Compile`$25] = {Temporary}, 
+       Attributes[Compile`$53] = {Temporary}, 
+       Attributes[Compile`$32] = {Temporary}, 
+       Attributes[Compile`$33] = {Temporary}, 
+       Attributes[Compile`$41] = {Temporary}, 
+       Attributes[Compile`$42] = {Temporary}, 
+       Attributes[Compile`$57] = {Temporary}, 
+       Attributes[Compile`$44] = {Temporary}, 
+       Attributes[Compile`$47] = {Temporary}, 
+       Attributes[Compile`$38] = {Temporary}, 
+       Attributes[Compile`$49] = {Temporary}, 
+       Attributes[Compile`$67] = {Temporary}, 
+       Attributes[Compile`$72] = {Temporary}, $CellContext`groupSet[
         "Cubic"] = {
         "23", "m\!\(\*OverscriptBox[\(3\), \(_\)]\)", "432", 
          "\!\(\*OverscriptBox[\(4\), \(_\)]\)3m", 
@@ -3968,14 +4596,14 @@ $CellContext`neighbors, $CellContext`fin}, $CellContext`dots = Table[{
    FontSize->Large],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{
-  3.546624476648452*^9, 3.547215446410071*^9, {3.547215890607608*^9, 
-   3.5472159031473303`*^9}, 3.547215951898821*^9, 3.5472170735836973`*^9}]
+  3.551098628853544*^9, 3.551098772032992*^9, 3.551099601336241*^9, {
+   3.5511111657518997`*^9, 3.551111166139058*^9}, 3.551111233406453*^9}]
 }, {2}]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1268, 968},
-WindowMargins->{{Automatic, 39}, {Automatic, 0}},
+WindowSize->{1431, 1002},
+WindowMargins->{{38, Automatic}, {Automatic, 0}},
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
 2011)",
 StyleDefinitions->"Default.nb"
@@ -3992,39 +4620,39 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 232, 3, 76, "Title"],
-Cell[814, 27, 319, 6, 43, "Subsubtitle"],
+Cell[579, 22, 353, 6, 76, "Title"],
+Cell[935, 30, 455, 9, 77, "Subsubtitle"],
 Cell[CellGroupData[{
-Cell[1158, 37, 253, 4, 34, "Subsection",
+Cell[1415, 43, 250, 4, 67, "Section",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[1414, 43, 240, 3, 24, "Subsubsection",
+Cell[1668, 49, 240, 3, 24, "Subsubsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[1657, 48, 1985, 31, 71, "Text",
+Cell[1911, 54, 2453, 38, 86, "Text",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[3645, 81, 285, 4, 24, "Subsubsection",
+Cell[4367, 94, 285, 4, 24, "Subsubsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[3933, 87, 3273, 48, 254, "Text",
+Cell[4655, 100, 4493, 69, 329, "Text",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[7209, 137, 181, 3, 24, "Subsubsection",
+Cell[9151, 171, 230, 3, 24, "Subsubsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[7393, 142, 1256, 20, 71, "Text",
+Cell[9384, 176, 2561, 42, 191, "Text",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[8686, 167, 168, 2, 37, "Section"],
-Cell[8857, 171, 6967, 164, 775, "Input",
+Cell[11982, 223, 168, 2, 37, "Section"],
+Cell[12153, 227, 16889, 370, 1904, "Input",
  InitializationCell->True],
-Cell[15827, 337, 73750, 1878, 2915, "Input",
+Cell[29045, 599, 75568, 1917, 2861, "Input",
  InitializationCell->True],
-Cell[89580, 2217, 30804, 712, 1138, "Input",
+Cell[104616, 2518, 39987, 929, 1349, "Input",
  InitializationCell->True]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[120421, 2934, 148, 2, 37, "Section"],
+Cell[144640, 3452, 148, 2, 37, "Section"],
 Cell[CellGroupData[{
-Cell[120594, 2940, 9764, 214, 673, "Input",
+Cell[144813, 3458, 10869, 235, 688, "Input",
  InitializationCell->True],
-Cell[130361, 3156, 43737, 815, 1052, "Output"]
+Cell[155685, 3695, 47913, 904, 1080, "Output"]
 }, {2}]]
 }, Open  ]]
 }, Open  ]]
